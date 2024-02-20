@@ -1,8 +1,10 @@
 let express = require('express');
 let app = express();
+let bodyParser = require("body-parser");
 
 require('dotenv').config();
 
+app.use(bodyParser.urlencoded({extended: false}));
 app.use("/public", express.static(__dirname + "/public"))
 
 const logger = (req, res, next) => {
