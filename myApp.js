@@ -16,6 +16,15 @@ app.get("/", (req,res) => {
     res.sendFile(__dirname + "/views/index.html");
 });
 
+app.get("/now", (req, res, next) => {
+    req.time = new Date().toString();
+    next()
+}, (req, res) => {
+    res.json({
+        time: req.time
+    });
+});
+
 app.get("/json", (req,res) => {
     const text = "Hello json";
     const message = process.env.MESSAGE_STYLE == "uppercase" ? text.toUpperCase() : text;
@@ -23,22 +32,5 @@ app.get("/json", (req,res) => {
         "message": message
     })
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  module.exports = app;
